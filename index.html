@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Photo gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 검색창 -->
+    <div id="search-box">
+        <input id="search" type="text" value="">
+        <input id="submit" type="submit" value="submit">
+    </div>
+    
+    <!-- 사전 -->
+   <div id="container"></div>
+   <script>
+       const query = document.getElementById('search')
+       const submitBtn = document.getElementById('submit')
+       const container = document.getElementById('container')
+       const BASE_URL = 'http://localhost:5000/api/words';
+
+       // 서버 데이터 가져오기
+       function getData(baseUrl, query){
+           // 서버 index.js 파일에 반드시 cors 옵션에 localhost:5500 주소를 허용한다고 설정해야 함
+
+           console.log(query)
+           fetch(`${baseUrl}/${query}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    // "Access-Control-Allow-Origin": "*" // 이 코드 때문에 CORS 에러가 발생한것임. 이 코드 주석처리하면 프론트엔드에서 곧바로 외부 API 접근가능하다. (프록시나 서버가 필요없음)
+                }
+           })
+           .then( res => res.json())
+           .then( data => {
+                console.log(data)
+                const {words} = data;
+
+                const template = words.map(word => {
+                    return (
+                        `
+                            <div class="item">
+                                <div class="word">${word.name}</div>
+                                <p class="description">${word.description}</div>
+                            </div>
+                        `
+                    )
+                })
+                container.innerHTML = template.join("")
+            })
+        }
+
+       submitBtn.addEventListener('click', function(){
+        //    console.log(this)
+                console.log(query.value)
+                getData(BASE_URL, query.value)
+          
+       })
+       window.addEventListener('DOMContentLoaded', function() { 
+            getData(BASE_URL)
+       });
+
+
+   </script>
+</body>
+</html>
