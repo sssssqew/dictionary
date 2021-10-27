@@ -37,6 +37,10 @@
            .then( data => {
                 console.log(data)
                 const {words} = data;
+                if(words.length === 0){
+                    container.innerHTML = "No Words yet !"
+                    return;
+                }
 
                 const template = words.map(word => {
                     return (
