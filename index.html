@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Photo gallery</title>
+    <title>사전 검색 사이트</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -46,8 +46,11 @@
                     return (
                         `
                             <div class="item">
-                                <div class="word">${word.name}</div>
-                                <p class="description">${word.description}</div>
+                                <div class="word">
+                                    <a href=${word.r_link} target="_blank">${word.r_word} ${word.r_hanja}
+                                    </a>
+                                </div>
+                                <p class="description">${word.r_des}</div>
                             </div>
                         `
                     )
@@ -61,6 +64,12 @@
                 console.log(query.value)
                 getData(BASE_URL, query.value)
           
+       })
+       query.addEventListener('keypress', function(e){
+           if(e.keyCode === 13){
+            getData(BASE_URL, query.value)
+           }
+
        })
        window.addEventListener('DOMContentLoaded', function() { 
             getData(BASE_URL)
