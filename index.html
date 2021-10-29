@@ -20,7 +20,8 @@
        const query = document.getElementById('search')
        const submitBtn = document.getElementById('submit')
        const container = document.getElementById('container')
-       const BASE_URL = 'http://localhost:5000/api/words';
+    //    const BASE_URL = 'http://localhost:5000/api/words';
+    const BASE_URL = 'https://dictionary-search.herokuapp.com/api/words'
 
        // 서버 데이터 가져오기
        function getData(baseUrl, query){
@@ -47,7 +48,7 @@
                         `
                             <div class="item">
                                 <div class="word">
-                                    <a href=${word.r_link} target="_blank">${word.r_word} ${word.r_hanja}
+                                    <a href=${word.r_link} target="_blank">${word.r_word} ${word.r_chi}
                                     </a>
                                 </div>
                                 <p class="description">${word.r_des}</div>
