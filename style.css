@@ -44,6 +44,9 @@ body {
     margin-bottom: 10px;
     background: tomato;
     display: inline-block; /* 컬럼 짤림 방지*/
+    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5-DYitoGR68tWOKZLyN59LPvRDs-yvl6E5A&usqp=CAU");
+    background-size: cover;
+    
 }
 
 
